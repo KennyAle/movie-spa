@@ -1,29 +1,27 @@
-import { useState, useEffect } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import MovieList from './components/MovieList';
+import MovieDetail from './components/MovieDetail';
 
 function App() {
-  const [data, setData] = useState(null)
-
-  useEffect(() => {
-    fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=daf788f2ab38afabc8b5ea0ee12373da')
-      .then((response) => response.json())
-      .then((data) => setData(data))
-  }, [])
-
-  console.log(data)
   
   return (
-    <div className='App'>
-        {data?.results.map((movie, index) => (
-        <div className='card' key={index}>
-          <h2>{movie.title}</h2>
-          <p>{movie.overview}</p>
-          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-        </div>
-        )
-      )
-    }
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <div className='2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10'>
+            <MovieList apiUrl='https://api.themoviedb.org/3/trending/movie/week?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+            <MovieList apiUrl='https://api.themoviedb.org/3/movie/now_playing?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+            <MovieList apiUrl='https://api.themoviedb.org/3/movie/popular?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+            <MovieList apiUrl='https://api.themoviedb.org/3/movie/upcoming?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+            <MovieList apiUrl='https://api.themoviedb.org/3/movie/top_rated?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+            <MovieList apiUrl='https://api.themoviedb.org/3/discover/movie?api_key=daf788f2ab38afabc8b5ea0ee12373da&with_genres=16' />
+          </div>} 
+        />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+      </Routes>
+    </Router>
   );
 }
 
