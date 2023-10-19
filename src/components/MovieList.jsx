@@ -1,22 +1,31 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function MovieList({ apiUrl }) {
     const [movieData, setMovieData] = useState(null)
+    const scrollContainerRef = useRef(null)
+
+    const scrollToStart = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTo({ left: 0, behavior: 'auto' })
+        }
+    }
 
     useEffect(() => {
         fetch(apiUrl)
           .then((response) => response.json())
           .then((data) => setMovieData(data))
-      }, [])
+          window.scrollTo(0, 0)
+      }, [apiUrl])
+
+      scrollToStart()
     
-      console.log(movieData)
     return (
-        <div className="relative flex gap-1 overflow-scroll scroll-smooth snap-x snap-mandatory touch-pan-x z-0">
+        <div ref={scrollContainerRef} className="flex overflow-scroll snap-x gap-x-10">
             {movieData?.results.map((movie) => (
-            <div className='relative w-64 h-64 snap-start' key={movie.id}>
-            <Link className="w-full h-full aspect-square block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0" to={`/movie/${movie.id}`}>
-                <img className='w-full aspect-square' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+            <div className="snap-start" key={movie.id}>
+            <Link to={`/movie/${movie.id}`}>
+                <img className="w-96" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
             </Link>
             </div>
             ))}

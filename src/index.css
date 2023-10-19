@@ -3,12 +3,24 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+:root {
+  color-scheme: light dark;
+}
+
 html, body {
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  img, video {
+    max-width: initial;
+    height: initial;
+  }
 }
 
 * {
