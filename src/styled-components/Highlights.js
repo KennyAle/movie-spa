@@ -11,7 +11,7 @@ export const Highlights = styled.ul`
         font-weight: 700;
         aspect-ratio: 3 / 2;
         list-style: none;
-        background-color: #ffffff35;
+        background-color: #80808035;
         padding: 5px;
         border-radius: 20px;
         display: grid;

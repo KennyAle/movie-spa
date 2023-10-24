@@ -7,6 +7,9 @@ import { Tagline } from '../styled-components/Tagline';
 import { Title } from '../styled-components/Title';
 import { Genres } from '../styled-components/Genres';
 import { Highlights } from '../styled-components/Highlights';
+import { Subtitle } from '../styled-components/Subtitle';
+import { Cast } from '../styled-components/Cast';
+import { Overview } from '../styled-components/Overview';
 
 function MovieDetail() {
   const { id } = useParams();
@@ -52,23 +55,22 @@ function MovieDetail() {
               <li><span>Rating</span>{movie.vote_average.toFixed(1)}</li>
             </Highlights>
           </section>
-          <section>
-            <h2>Description</h2>
-            <p>{movie.overview}</p>
-          </section>
-          <section>
-            <h2>Cast</h2>
-            <ul>
-              {movie.credits.cast.slice(0, 10).map((castMember) => (
-                <li key={castMember.id}>
-                  <p>{castMember.name}</p>
-                  {/* <img src={`https://image.tmdb.org/t/p/w500${castMember.profile_path}`} alt={castMember.name} /> */}
-                </li>
-              ))}
-            </ul>
-            <p></p>
-          </section>
-          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+          <Overview>
+            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+            <section>
+              <Subtitle>Description</Subtitle>
+              <p>{movie.overview}</p>
+              <Subtitle>Cast</Subtitle>
+              <Cast>
+                {movie.credits.cast.slice(0, 10).map((castMember) => (
+                  <li key={castMember.id}>
+                    <img src={`https://image.tmdb.org/t/p/w500${castMember.profile_path}`} alt={castMember.name} />
+                    <p>{castMember.name}</p>
+                  </li>
+                ))}
+              </Cast>
+            </section>
+          </Overview>
           <iframe width="560" height="315" 
             src={`https://www.youtube.com/embed/${movie.videos.results[movie.videos.results.length - 1].key}?autoplay=1&mute=1`} 
             title={movie.title} 
