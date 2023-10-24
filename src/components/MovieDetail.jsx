@@ -6,6 +6,7 @@ import MovieList from './MovieList';
 import { Tagline } from '../styled-components/Tagline';
 import { Title } from '../styled-components/Title';
 import { Genres } from '../styled-components/Genres';
+import { Highlights } from '../styled-components/Highlights';
 
 function MovieDetail() {
   const { id } = useParams();
@@ -34,7 +35,7 @@ function MovieDetail() {
     <section>
       {movie ? (
         <div>
-          <Tagline>{movie.tagline}</Tagline>  
+          <Tagline>"{movie.tagline}"</Tagline>  
           <Title>{movie.title}</Title>
           <Genres>
             {movie.genres.map((genre) => (
@@ -42,14 +43,14 @@ function MovieDetail() {
             ))}
           </Genres>
           <section>
-            <ul>
+            <Highlights>
               <li><a href="">Play</a></li>
               <li><span>Release</span>{new Date(movie.release_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</li>
               <li><span>Country</span>{movie.production_countries[0].iso_3166_1}</li>
               <li><span>Length</span>{movie.runtime} min</li>
               <li><span>Budget</span>{formatBudget(movie.budget)}</li>
               <li><span>Rating</span>{movie.vote_average.toFixed(1)}</li>
-            </ul>
+            </Highlights>
           </section>
           <section>
             <h2>Description</h2>
