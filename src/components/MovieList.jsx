@@ -21,7 +21,7 @@ function MovieList({ apiUrl }) {
       scrollToStart()
     
     return (
-        <div ref={scrollContainerRef} className="flex overflow-scroll snap-x gap-x-10">
+        <section ref={scrollContainerRef} className="flex overflow-scroll snap-x gap-x-10 py-3">
             {movieData?.results.map((movie) => (
             <div className="snap-start" key={movie.id}>
             <Link to={`/movie/${movie.id}`}>
@@ -29,7 +29,7 @@ function MovieList({ apiUrl }) {
             </Link>
             </div>
             ))}
-        </div>
+        </section>
     )
 }
 
