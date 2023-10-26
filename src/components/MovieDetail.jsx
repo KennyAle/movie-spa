@@ -83,7 +83,7 @@ function MovieDetail() {
               </Cast>
             </section>
           </Overview>
-          <iframe width="560" height="315" 
+          <iframe className='m-[auto]' width="560" height="315" 
           src={
             movie.videos && movie.videos.results && movie.videos.results.length > 0
               ? `https://www.youtube.com/embed/${movie.videos.results[movie.videos.results.length - 1].key}`

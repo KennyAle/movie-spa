@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Link, useParams } from 'react-r
 import MovieList from './components/MovieList';
 import MovieDetail from './components/MovieDetail';
 import SearchBar from './components/SearchBar';
+import { Subtitle } from './styled-components/Subtitle';
 
 function App() {
   const [showSearch, setShowSearch] = useState(true);
@@ -28,7 +29,6 @@ function App() {
             <Link to="/">Home</Link>
           </li>
         </ul>
-      </nav>
       {showSearch && <SearchBar handleShowSearch={handleShowSearch} />}
       {/* <aside>
         <ul>
@@ -39,16 +39,32 @@ function App() {
           ))}
         </ul>
       </aside> */}
+      </nav>
       <Routes>
         <Route
           path="/"
           element={
-            <div className='2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10'>
-              <MovieList apiUrl='https://api.themoviedb.org/3/trending/movie/week?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
-              <MovieList apiUrl='https://api.themoviedb.org/3/movie/now_playing?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
-              <MovieList apiUrl='https://api.themoviedb.org/3/movie/popular?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
-              <MovieList apiUrl='https://api.themoviedb.org/3/movie/upcoming?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
-              <MovieList apiUrl='https://api.themoviedb.org/3/movie/top_rated?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+            <div className='flex flex-col 2xl:container 2xl:mx-auto 2xl:px-0 py-3 gap-5 px-10'>
+              <article>
+                <Subtitle>Trending this week</Subtitle>
+                <MovieList apiUrl='https://api.themoviedb.org/3/trending/movie/week?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+              </article>
+              <article>
+                <Subtitle>Current Releases</Subtitle>
+                <MovieList apiUrl='https://api.themoviedb.org/3/movie/now_playing?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+              </article>
+              <article>
+                <Subtitle>Top Picks</Subtitle>
+                <MovieList apiUrl='https://api.themoviedb.org/3/movie/popular?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+              </article>
+              <article>
+                <Subtitle>Upcoming releases</Subtitle>
+                <MovieList apiUrl='https://api.themoviedb.org/3/movie/upcoming?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+              </article>
+              <article>
+                <Subtitle>Top Rated</Subtitle>
+                <MovieList apiUrl='https://api.themoviedb.org/3/movie/top_rated?api_key=daf788f2ab38afabc8b5ea0ee12373da' />
+              </article>
             </div>
           }
         />
