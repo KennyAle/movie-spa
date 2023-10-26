@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// Define a styled component called 'Cast' with CSS properties
 export const Cast = styled.ul`
     display: flex;
     flex-wrap: wrap;

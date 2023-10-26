@@ -20,6 +20,7 @@ function MovieDetail() {
 
 
   useEffect(() => {
+    // Fetch movie details and related data from the API
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=daf788f2ab38afabc8b5ea0ee12373da&append_to_response=videos,images,credits`)
       .then((response) => response.json())
       .then((data) => {
@@ -29,11 +30,12 @@ function MovieDetail() {
           setBackgroundImageUrl(url);
         }
       });
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0) // Scroll to the top of the page when the component loads
   }, [id]);
 
   movie && console.log(movie);
 
+    // Function to format budget numbers
   function formatBudget(budget) {
     if (budget >= 1000000) {
       return `$${(budget / 1000000).toFixed(0)}M`

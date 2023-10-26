@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// Define a styled component called 'BannerDetails' with CSS properties
 export const BannerDetail = styled.section`
     width: 100%;
     padding: 0 3%;

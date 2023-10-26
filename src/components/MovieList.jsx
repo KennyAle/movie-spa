@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 
 function MovieList({ apiUrl }) {
     const [movieData, setMovieData] = useState(null)
-    const scrollContainerRef = useRef(null)
+    // const scrollContainerRef = useRef(null)
 
     // const scrollToStart = () => {
     //     if (scrollContainerRef.current) {

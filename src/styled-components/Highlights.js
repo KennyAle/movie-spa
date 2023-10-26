@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// Define a styled component called 'Highlights' with CSS properties
 export const Highlights = styled.ul`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// Define a styled component called 'Overview' with CSS properties
 export const Overview = styled.section`
     padding: 2rem;
     display: grid;

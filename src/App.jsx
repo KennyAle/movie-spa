@@ -1,44 +1,61 @@
+// Import necessary dependencies and components
 import './App.css';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useParams } from 'react-router-dom';
-
 import MovieList from './components/MovieList';
 import MovieDetail from './components/MovieDetail';
 import SearchBar from './components/SearchBar';
+import GenreMovieList from './components/GenreMovieList';
 import { Subtitle } from './styled-components/Subtitle';
 
+// Define the main App component
 function App() {
-  const [showSearch, setShowSearch] = useState(true);
-  const [genres, setGenres] = useState([]);
+  // Define state variables and initialize them
+  const [showSearch, setShowSearch] = useState(true); // State for showing/hiding search
+  const [genres, setGenres] = useState([]); // State for storing genre data
+  const [showGenres, setShowGenres] = useState(false); // State for showing/hiding genres
 
+  // Function to toggle the visibility of the search bar
   function handleShowSearch() {
     setShowSearch(!showSearch);
   }
 
+  // Fetch genre data from an API when the component mounts
   useEffect(() => {
     fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=daf788f2ab38afabc8b5ea0ee12373da')
       .then((response) => response.json())
       .then((data) => setGenres(data.genres));
   }, []);
 
+  // Function to toggle the visibility of the genres sidebar
+  function toggleGenres() {
+    setShowGenres(!showGenres);
+  }
+
   return (
     <Router>
       <nav>
-        <ul>
+        <ul className='flex justify-between'>
           <li>
-            <Link to="/">Home</Link>
+            <button onClick={toggleGenres}>Genres</button> {/* Button to show/hide genres */}
+          </li>
+          <li>
+            <Link to="/">Home</Link> {/* Link to the home page */}
+          </li>
+          <li>
+            {showSearch && <SearchBar handleShowSearch={handleShowSearch} />} {/* Conditionally render the search bar */}
           </li>
         </ul>
-      {showSearch && <SearchBar handleShowSearch={handleShowSearch} />}
-      {/* <aside>
-        <ul>
-          {genres.map((genre) => (
-            <li key={genre.id}>
-              <Link to={`/genre/${genre.id}`}>{genre.name}</Link>
-            </li>
-          ))}
-        </ul>
-      </aside> */}
+        <aside className={`aside ${showGenres ? '' : 'hidden'}`}>
+          {/* Sidebar for genres, shown when showGenres is true */}
+          <ul>
+            {genres.map((genre) => (
+              <li key={genre.id}>
+                <Link to={`/genre/${genre.id}`}>{genre.name}</Link> {/* Link to genre pages */}
+              </li>
+            ))}
+          </ul>
+        </aside>
       </nav>
       <Routes>
         <Route
@@ -73,12 +90,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
-
-function GenreMovieList() {
-  const { id } = useParams();
-  const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=daf788f2ab38afabc8b5ea0ee12373da&with_genres=${id}`;
-  return <MovieList apiUrl={apiUrl} />;
 }
 
 export default App;
