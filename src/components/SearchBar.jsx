@@ -21,7 +21,7 @@ function SearchBar({handleShowSearch}) {
     return (
         <>
             <form onSubmit={renderMovies}>
-                <input type="text" onChange={e => setSearchValue(e.target.value)} />
+                <input type="text" placeholder='Avengers, Star Wars...' onChange={e => setSearchValue(e.target.value)} />
                 <input type="submit" value="Search" />
             </form>
             <div className="flex flex-wrap">
